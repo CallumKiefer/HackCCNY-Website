@@ -7,6 +7,14 @@
     <meta name="description" content="HackCCNY">
     <meta name="keywords"
           content="CCNY, CUNY, HackCCNY">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128951306-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128951306-1');
+    </script>
 
     <link rel="icon" href="img\favicon.ico">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
@@ -19,14 +27,14 @@
     <script src="js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#register").click(function () {
+            $(".gform").on('submit', function () {
                 $("#thankyou").removeClass("hidden");
                 $("#registration").addClass("hidden");
             });
             var team = false;
 
             //Inputs that determine what fields to show
-            var rating = $('#registration input:radio[name=comingWithTeam]');
+            var teammed = $('#registration input:radio[name=comingWithTeam]');
 
             var numberOnTeam = $("#numberOnTeam").parent();
             var teamName = $("#teamName").parent();
@@ -34,11 +42,13 @@
 
             var all = numberOnTeam.add(teamName).add(teammateNames);
 
-            rating.change(function () {
+            teammed.change(function () {
                     var value = this.value;
                     all.addClass('hidden');
                     if (value == 'yes') {
                         all.removeClass("hidden");
+                        $("#numberOnTeam").prop('required', true);
+                        $("#teammateNames").prop('required', true);
                     }
                 }
             );
@@ -90,7 +100,7 @@
 </section>
 <section>
     <form method="post" class="gform pure-form pure-form-stacked" id="registration"
-          action="https://script.google.com/macros/s/AKfycbzO10rzDfvtMzXus7w8AIFYzHtMKHGpS_QDcgDFAYnLasW5Ooo/exec">
+          action="https://script.google.com/a/gtest.ccny.cuny.edu/macros/s/AKfycbxDvNtKpx78MQ6KnvTYXpESKdmcHNS95cRXhoHE/exec">
         <h1 class="text-center">Registration!</h1>
         <div class="container col-md-offset-3">
 
@@ -174,8 +184,24 @@
                 <input type="text" class="form-control" name="major" id="studying" aria-describedby="studyingHelp"
                        placeholder="" required>
             </div>
-
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-5">
+                <label for="undergrad" class="black" style="padding-bottom: 5px">Are you an undergraduate or a graduate student? <sup
+                        style="color:#ff4441; font-size: 13px;">*</sup></label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="levelOfEducation" id="undergrad" value="undergraduate" required>
+                    <label class="form-check-label" style="color:#424242" for="one">
+                        Undergraduate Student
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="levelOfEducation" id="grad" value="graduate"
+                           required>
+                    <label class="form-check-label" style="color:#424242" for="2to3">
+                        Graduate Student
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-5">
                 <label for="InputSchool" class="black" style="padding-bottom: 5px">Graduation Year <sup
                         style="color:#ff4441; font-size: 13px;">*</sup></label>
                 <select class="form-control" name="gradYear" id="gradYear" required>
@@ -188,8 +214,10 @@
                     <option value="2023">2023</option>
                     <option value="2024">2024</option>
                     <option value="2025">2025</option>
+                    <option value="n/a">Not Applicable</option>
                 </select>
             </div>
+
             <div class="form-group col-md-10">
                 <label for="resume" class="black" style="padding-bottom: 5px">Resume (Google Docs or Dropbox pdf link
                     please) <sup style="color:#ff4441; font-size: 13px;">*</sup></a></label>
@@ -260,23 +288,23 @@
                 <label class="black" style="padding-bottom: 5px">How many hackathons have you been to in the past? <sup
                         style="color:#ff4441; font-size: 13px;">*</sup></a></label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="howManyHackathon" id="one" value="one" required>
-                    <label class="form-check-label" style="color:#424242" for="one">
-                        1
+                    <input class="form-check-input" type="radio" name="howManyHackathon" id="zero" value="zero" required>
+                    <label class="form-check-label" style="color:#424242" for="zero">
+                        This will be my first hackathon
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="howManyHackathon" id="2to3" value="2to3"
+                    <input class="form-check-input" type="radio" name="howManyHackathon" id="1to2" value="1to2"
                            required>
-                    <label class="form-check-label" style="color:#424242" for="2to3">
-                        2-3
+                    <label class="form-check-label" style="color:#424242" for="1to2">
+                        1-2
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="howManyHackathon" id="4to5" value="4to5"
+                    <input class="form-check-input" type="radio" name="howManyHackathon" id="3to5" value="3to5"
                            required>
-                    <label class="form-check-label" style="color:#424242" for="4to5">
-                        4-5
+                    <label class="form-check-label" style="color:#424242" for="3to5">
+                        3-5
                     </label>
                 </div>
                 <div class="form-check">
@@ -295,6 +323,81 @@
                 </div>
 
 
+            </div>
+
+            <div class="form-check form-group col-md-10">
+                <label class="black" style="padding-bottom: 5px">Which programming languages do you have experience with? <sup
+                        style="color:#ff4441; font-size: 13px;">*</sup></a></label>
+            <br>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="python"
+                           id="python">
+                    <label class="form-check-label" style="color:#424242" for="python">
+                        Python
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="java" id="java">
+                    <label class="form-check-label" style="color:#424242" for="java">
+                        Java
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="swift" id="swift">
+                    <label class="form-check-label" style="color:#424242" for="swift">
+                        Swift
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="C/C++" id="C/C++">
+                    <label class="form-check-label" style="color:#424242" for="C/C++">
+                        C/C++
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="js" id="js">
+                    <label class="form-check-label" style="color:#424242" for="js">
+                        Javascript
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="SQL"
+                           id="SQL">
+                    <label class="form-check-label" style="color:#424242" for="SQL">
+                        SQL
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="o-c"
+                           id="o-c">
+                    <label class="form-check-label" style="color:#424242" for="o-c">
+                        Objective C
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="go" id="go">
+                    <label class="form-check-label" style="color:#424242" for="go">
+                        Go
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="php" id="php">
+                    <label class="form-check-label" style="color:#424242" for="php">
+                        PHP
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="html/css" id="html/css">
+                    <label class="form-check-label" style="color:#424242" for="html/css">
+                        HTML/CSS
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" name="programmingLanguages" value="other" id="other1">
+                    <label class="form-check-label" style="color:#424242" for="other1">
+                        Other
+                    </label>
+                </div>
             </div>
 
             <div class="form-check form-group col-md-10">
@@ -355,29 +458,28 @@
             </div>
 
             <div class="form-group col-md-10 hidden">
-                <label for="InputSchool" class="black" style="padding-bottom: 5px">How many people will be on the team?
+                <label for="numberOnTeam" class="black" style="padding-bottom: 5px">How many people will be on the team?
                     <sup
                             style="color:#ff4441; font-size: 13px;">*</sup></label>
                 <input type="number" name="numberOnTeam" class="form-control" id="numberOnTeam"
                        aria-describedby="numberOnTeam"
-                       placeholder="" required>
+                       placeholder="">
             </div>
 
             <div class="form-group col-md-10 hidden">
-                <label for="InputSchool" class="black" style="padding-bottom: 5px">What do you want your team name to
-                    be? <sup
-                            style="color:#ff4441; font-size: 13px;">*</sup></label>
-                <input type="number" name="teamName" class="form-control" id="teamName" aria-describedby="teamName"
-                       placeholder="" required>
+                <label for="teamName" class="black" style="padding-bottom: 5px">What do you want your team name to
+                    be? </label>
+                <input type="text" name="teamName" class="form-control" id="teamName" aria-describedby="teamName"
+                       placeholder="">
             </div>
 
             <div class="form-group col-md-10 hidden">
-                <label for="InputSchool" class="black" style="padding-bottom: 5px">What are the names of your teammates?
+                <label for="teammateNames" class="black" style="padding-bottom: 5px">What are the names of your teammates?
                     <sup
                             style="color:#ff4441; font-size: 13px;">*</sup></label>
-                <input type="number" name="teammateNames" class="form-control" id="teammateNames"
+                <input type="text" name="teammateNames" class="form-control" id="teammateNames"
                        aria-describedby="teammateNames"
-                       placeholder="" required>
+                       placeholder="">
             </div>
 
             <div class="form-group col-md-10">
